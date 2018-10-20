@@ -1,0 +1,17 @@
+
+;; ----- smex-history -----
+(
+ eww-mode
+ 5x5
+ cd
+ arp
+ dbx
+ dig
+ erc
+)
+
+;; ----- smex-data -----
+(
+ (5x5 . 1)
+ (eww-mode . 1)
+)
