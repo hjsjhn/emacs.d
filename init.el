@@ -102,6 +102,11 @@
 (setq-default indent-tabs-mode nil)
 
 ;;; 插件
+;; magit
+(use-package magit
+			 :ensure t
+			 )
+
 ;; window-numbering
 (use-package window-numbering
   :ensure t
@@ -115,8 +120,6 @@
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  (require 'counsel)
-  (require 'swiper)
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
@@ -127,9 +130,9 @@
 
 ;; doom-modeline
 (use-package doom-modeline
-             :ensure t
-             :defer t
-             :hook (after-init . doom-modeline-init))
+  :ensure t
+  :defer t
+  :hook (after-init . doom-modeline-init))
 
 ;; doom-themes
 (use-package doom-themes
@@ -147,7 +150,6 @@
   :ensure t
   :defer t
   :config
-  (use-package magit :ensure t)
   (setq
    treemacs-display-in-side-window t
    treemacs-wigth 30))
