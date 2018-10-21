@@ -146,6 +146,7 @@
   :ensure t
   :defer t
   :config
+  (use-package magit)
   (setq
    treemacs-display-in-side-window t
    treemacs-wigth 30))
