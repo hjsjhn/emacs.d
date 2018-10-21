@@ -29,7 +29,6 @@
 
 ;;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'doom-molokai)
 (setq-default cursor-type 'blink)
 ;; (set-cursor-color "white")
 (setq-default line-spacing 0.15)
@@ -146,7 +145,7 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
   (doom-themes-visual-bell-config)
-  ;; (load-theme 'doom-one t)
+  (load-theme 'doom-molokai t)
   ;; (doom-themes-treemacs-config)
   (doom-themes-org-config))
 
