@@ -122,9 +122,9 @@
 	   (:keywords "convenience"))])
  (brief .
 	[(5 86)
-	 nil "Brief Editor Emulator (Brief Mode)" single
-	 ((:url . "http://elpa.gnu.org/packages/brief.html")
-	  (:keywords "brief" "emulations" "crisp"))])
+	 nil "Brief Editor Emulator (Brief Mode)" tar
+	 ((:keywords "brief" "emulations" "crisp")
+	  (:url . "http://elpa.gnu.org/packages/brief.html"))])
  (bug-hunter .
 	     [(1 3 1)
 	      ((seq

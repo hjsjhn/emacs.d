@@ -78,13 +78,15 @@
 ;;              ("melpa" . "https://melpa.org/packages/") t)
 
 ;;; 自定义快捷键
-(defun use-evil ()
-  (use-package evil
-    :ensure t
-    :config
-    (evil-mode 1)
-    (setq-default evil-cross-lines t)))
-;; (use-evil) ; 如果想使用evil-mode,取消注释此行代码
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (setq-default evil-cross-lines t))
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
 (defun open-terminal()

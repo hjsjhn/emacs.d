@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+g++ $1;
+if [ $2 0 ] ; then ./a.out; 
+else ./a.out < $2 > out && cat out;
+fi
