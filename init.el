@@ -18,14 +18,6 @@
    (quote
     (muse evil use-package doom-modeline airline-themes spaceline smart-mode-line-powerline-theme smart-mode-line celestial-mode-line window-layout doom-themes molokai-theme spacemacs-theme zenburn-theme treemacs monokai-alt-theme smex markdown-mode atom-one-dark-theme atom-dark-theme monokai-theme indent-guide multi-term w3m cnfonts window-numbering darkokai-theme color-theme-sanityinc-solarized))))
 
-;;; 字体
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Input" :foundry "unknown" :slant normal :weight normal :height 128 :width normal)))))
-
 ;;; 窗口自定义样式
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -112,9 +104,9 @@
 
 ;;; 插件
 ;; magit
-;; (use-package magit
-;;   :ensure t
-;;   )
+(use-package magit
+  :ensure t
+  )
 
 ;; window-numbering
 (use-package window-numbering
