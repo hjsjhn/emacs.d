@@ -20,7 +20,6 @@
 (scroll-bar-mode 0)
 (show-paren-mode t)
 (global-linum-mode 1)
-(window-numbering-mode t)
 (global-auto-revert-mode t)
 (global-hl-line-mode)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -100,6 +99,12 @@
 (setq-default indent-tabs-mode nil)
 
 ;;; 插件
+;; window-numbering
+(use-package window-numbering
+  :ensure t
+  :config
+  (window-numbering-mode t))
+
 ;; Ivy && Counsel && Swiper
 (use-package ivy
   :ensure t
