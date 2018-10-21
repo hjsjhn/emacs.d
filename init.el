@@ -33,16 +33,6 @@
 
 ;;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-;; doom-themes
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (doom-themes-visual-bell-config)
-  (load-theme 'doom-molokai t)
-  ;; (doom-themes-treemacs-config)
-  (doom-themes-org-config))
 (setq-default cursor-type 'blink)
 ;; (set-cursor-color "white")
 (setq-default line-spacing 0.15)
@@ -141,12 +131,23 @@
              :defer t
              :hook (after-init . doom-modeline-init))
 
+;; doom-themes
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (doom-themes-visual-bell-config)
+  (load-theme 'doom-molokai t)
+  ;; (doom-themes-treemacs-config)
+  (doom-themes-org-config))
+
 ;; treemacs
 (use-package treemacs
   :ensure t
   :defer t
   :config
-  (use-package magit)
+  (use-package magit :ensure t)
   (setq
    treemacs-display-in-side-window t
    treemacs-wigth 30))
