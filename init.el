@@ -6,10 +6,6 @@
 
 ;;; 没用，忽略
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
     ("3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" default)))
@@ -33,6 +29,16 @@
 
 ;;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;; doom-themes
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t)
+  (doom-themes-visual-bell-config)
+  (load-theme 'doom-molokai t)
+  ;; (doom-themes-treemacs-config)
+  (doom-themes-org-config))
 (setq-default cursor-type 'blink)
 ;; (set-cursor-color "white")
 (setq-default line-spacing 0.15)
@@ -115,6 +121,8 @@
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
+  (require 'counsel)
+  (require 'swiper)
   (global-set-key (kbd "M-x") 'counsel-M-x)
   (global-set-key (kbd "C-x C-f") 'counsel-find-file)
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
@@ -141,18 +149,6 @@
    treemacs-display-in-side-window t
    treemacs-wigth 30)
   )
-
-;; doom-themes
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (doom-themes-visual-bell-config)
-  (load-theme 'doom-molokai t)
-  ;; (doom-themes-treemacs-config)
-  (doom-themes-org-config))
-
 
 ;; airline
 ;; (require 'airline-themes)
