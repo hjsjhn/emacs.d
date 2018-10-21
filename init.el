@@ -122,6 +122,8 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
   (use-package counsel
+	:ensure t
+	:config
     (global-set-key (kbd "M-x") 'counsel-M-x)
     (global-set-key (kbd "C-x C-f") 'counsel-find-file)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
