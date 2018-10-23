@@ -6,17 +6,13 @@
 
 ;;; 没用，忽略
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
     ("3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" default)))
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (muse evil use-package doom-modeline airline-themes spaceline smart-mode-line-powerline-theme smart-mode-line celestial-mode-line window-layout doom-themes molokai-theme spacemacs-theme zenburn-theme treemacs monokai-alt-theme smex markdown-mode atom-one-dark-theme atom-dark-theme monokai-theme indent-guide multi-term w3m cnfonts window-numbering darkokai-theme color-theme-sanityinc-solarized))))
+    (counsel swiper counsel-ebdb all-the-icons-ivy muse evil use-package doom-modeline airline-themes spaceline smart-mode-line-powerline-theme smart-mode-line celestial-mode-line window-layout doom-themes molokai-theme spacemacs-theme zenburn-theme treemacs monokai-alt-theme smex markdown-mode atom-one-dark-theme atom-dark-theme monokai-theme indent-guide multi-term w3m cnfonts window-numbering darkokai-theme color-theme-sanityinc-solarized))))
 
 ;;; 窗口自定义样式
 (tool-bar-mode 0)
@@ -44,9 +40,6 @@
       '((java-mode . "java")(other . "awk")))
 
 ;;; packages
-;; (require 'package)
-;; (package-initialize)
-;; (add-to-list'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (require 'package)
 (add-to-list 'package-archives'
 	     ("gnu-cn" . "http://elpa.zilongshanren.com/gnu/") t)
@@ -71,13 +64,23 @@
 ;;              ("melpa" . "https://melpa.org/packages/") t)
 
 ;;; 自定义快捷键
-(defun use-evil ()
-  (use-package evil
-    :ensure t
-    :config
-    (evil-mode 1)
-    (setq-default evil-cross-lines t)))
-;; (use-evil) ; 如果想使用evil-mode,取消注释此行代码
+(defun switch-evil()
+  (interactive)
+  (setq state (logxor 1 state))
+  (if state
+      (progn
+        (use-package evil
+          :ensure t
+          :config
+          (evil-mode 1)
+          (setq-default evil-cross-lines t)
+          (define-key evil-insert-state-map (kbd "\jk") 'evil-change-to-previous-state)))
+    (progn
+      (evil-mode nil)
+      (setq cursor-type 'blink)
+      (evil-state 'emacs))))
+(setq state 0)
+(global-set-key (kbd "C-z") 'switch-evil) 
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
 (defun open-terminal()
@@ -103,10 +106,9 @@
 (setq-default indent-tabs-mode nil)
 
 ;;; 插件
-;; magit
+; magit
 (use-package magit
-  :ensure t
-  )
+  :ensure t)
 
 ;; window-numbering
 (use-package window-numbering
@@ -121,16 +123,9 @@
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)
-  (use-package counsel
-	:ensure t
-	:config
-    (global-set-key (kbd "M-x") 'counsel-M-x)
-    (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-    (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history))
-  (use-package swiper
-    :ensure t
-    :config
-    (global-set-key "\C-s" 'swiper)))
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key "\C-s" 'swiper))
 
 ;; recentf
 (use-package recentf)
@@ -160,61 +155,3 @@
   (setq
    treemacs-display-in-side-window t
    treemacs-wigth 30))
-
-;; airline
-;; (require 'airline-themes)
-;; (load-theme 'airline-light)
-;; (setq airline-utf-glypj-linebumber '#xe0a1)
-;; (setq airline-display-directory 'Shortened)
-;; (powerline-vim-theme)
-
-;;; tabbar
-;; (tabbar-mode t)
-;; (global-set-key (kbd "M-j") 'tabbar-backward)
-;; (global-set-key (kbd "M-k") 'tabbar-forward)
-;;(indent-guide-mode t)
-;;(indent-guide-global-mode t)
-;;(auto-complete-mode t)
-;;(smart-mode-line-enable t)
-
-;;; 透明度
-;;(set-frame-parameter (selected-frame) 'alpha (list 97 97))
-;;(add-to-list 'default-frame-alist (cons 'alpha (list 97 97)))
-
-;;; 主题
-;; (setq molokai-theme-kit t)
-;; (load-theme 'molokai t)
-;;(setq sanityinc-solarized-dark-theme-kit t)
-;;(load-theme 'sanityinc-solarized-dark)
-;;(load-theme 'darkokai)
-;;(load-theme 'subtle-blue)
-;;(load-theme 'rebecca)
-;;(load-theme 'atom-one-dark)
-;;(load-theme 'monokai-alt)
-;;(load-theme 'spacemacs-light)
-;;(load-theme 'doom-nova)
-;;(load-theme 'doom-one)
-;; (load-theme 'doom-nord)
-;;(load-theme 'github)
-;;(load-theme 'smart-mode-line-powerline)
-;;(set-cursor-color "#4169E1")
-
-;;; 窗口大小
-;;(set-frame-width (selected-frame) 100)
-;;(set-frame-height (selected-frame) 47)
-
-;;; 把C-j绑定到到达指定行上 
-;;(global-set-key (kbd "C-x C-j") 'goto-line)
-;;(global-set-key (kbd "") 'goto-line)
-
-;;; packages
-;;(add-to-list 'package-archives 
-;;             '("melpa" . "http://melpa.org/packages/"))
-
-;;; THEME
-;;(set-default-font "Monaco-14")  
-;;(set-frame-font "Source Code Pro-12")
-
-;;; 关闭剪切板 (for manjaro)
-;; (setq x-select-enable-clipboard-manager nil)
-
