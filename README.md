@@ -2,6 +2,7 @@
 
 ## Supported Emacs versions
 The config should run on Emacs 25.2 or greater because of some package.
+
 (It'll give you a better experience if you work on Linux.)
 ## Installation
 To install, clone this repo to `~/.emacs.d`.
