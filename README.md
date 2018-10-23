@@ -8,7 +8,7 @@ The config should run on Emacs 25.2 or greater because of some package.
 To install, clone this repo to `~/.emacs.d`.
 
 Make sure that the `init.el` contained in the `.emacs.d`.
-``` bash
+```bash
 git clone https://github.com/SysConKonn/.emacs.d.git ~/.emacs.d
 ```
 The third-party packages will be automatically downloaded and installed when you start it for the first time.
