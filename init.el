@@ -6,15 +6,20 @@
 
 ;;; 没用，忽略
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" default)))
+    ("4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" default)))
  '(inhibit-startup-screen t)
+ '(org-export-backends (quote (ascii html icalendar latex md odt)))
  '(package-selected-packages
    (quote
-    (counsel swiper counsel-ebdb all-the-icons-ivy muse evil use-package doom-modeline airline-themes spaceline smart-mode-line-powerline-theme smart-mode-line celestial-mode-line window-layout doom-themes molokai-theme spacemacs-theme zenburn-theme treemacs monokai-alt-theme smex markdown-mode atom-one-dark-theme atom-dark-theme monokai-theme indent-guide multi-term w3m cnfonts window-numbering darkokai-theme color-theme-sanityinc-solarized))))
+    (impatient-mode htmlize counsel swiper all-the-icons-ivy muse evil use-package doom-modeline airline-themes spaceline smart-mode-line-powerline-theme smart-mode-line celestial-mode-line window-layout doom-themes molokai-theme spacemacs-theme zenburn-theme treemacs monokai-alt-theme smex markdown-mode atom-one-dark-theme atom-dark-theme monokai-theme indent-guide multi-term w3m cnfonts window-numbering darkokai-theme color-theme-sanityinc-solarized))))
 
-;;; 窗口自定义样式
+;; 窗口自定义样式
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
@@ -22,15 +27,14 @@
 (global-linum-mode 1)
 (global-auto-revert-mode t)
 (global-hl-line-mode)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(setq maxx nil)
+(if maxx
+    (add-to-list 'default-frame-alist '(fullscreen . maximized)))
 (load-file "~/.emacs.d/private/start.el")
-;; (set-frame-width (selected-frame) 85)
-;; (set-frame-height (selected-frame) 40)
 
 ;;; 主题
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq-default cursor-type 'blink)
-;; (set-cursor-color "white")
 (setq-default line-spacing 0.15)
 
 (put 'downcase-region 'disabled nil)
@@ -52,16 +56,6 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-;; (add-to-list 'package-archives'
-;; 	     ("melpa-cn" . "http://elpa.zilongshanren.com/melpa/") t)
-;; (add-to-list 'package-archives'
-;;              ("popkit" . "https://elpa.popkit.org/packages/") t)
-;; (add-to-list 'package-archives' 
-;; 	     ("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list 'package-archives' 
-;;	     ("gnu" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/") t)
-;; (add-to-list 'package-archives'
-;;              ("melpa" . "https://melpa.org/packages/") t)
 
 ;;; 自定义快捷键
 (defun switch-evil()
@@ -80,7 +74,7 @@
       (setq cursor-type 'blink)
       (evil-state 'emacs))))
 (setq state 0)
-(global-set-key (kbd "C-z") 'switch-evil) 
+(global-set-key (kbd "C-z") 'switch-evil)
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
 (defun open-terminal()
@@ -93,8 +87,17 @@
   (find-file "in")
   )
 (global-set-key (kbd "<f2>") 'open-terminal)
-(global-set-key (kbd "C-x t") 'multi-term)
+(global-set-key (kbd "C-x t") 'term)
 (global-set-key (kbd "C-c e") 'treemacs)
+(defun templ()
+  (interactive)
+  (load-file "~/.emacs.d/template/cpp/create_template.el"))
+
+;;; org-mode
+(setq org-html-head "<link rel='stylesheet' type='text/css' href='http://www.pirilampo.org/styles/readtheorg/css/htmlize.css'/>\n<link rel='stylesheet' type='text/css' href='http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css'/>\n<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>\n<script type='text/javascript' src='http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js'></script>\n<script type='text/javascript' src='http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js'></script>")
+(add-hook 'org-mode-hook 'turn-on-font-lock)
+(add-hook 'org-mode-hook 
+(lambda () (setq truncate-lines nil)))
 
 ;;; 显示时间
 (display-time-mode 1) ;; 常显
@@ -106,9 +109,10 @@
 (setq-default indent-tabs-mode nil)
 
 ;;; 插件
-; magit
+;; magit
 (use-package magit
-  :ensure t)
+  :ensure t
+  )
 
 ;; window-numbering
 (use-package window-numbering
