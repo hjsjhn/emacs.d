@@ -19,5 +19,5 @@ It'll take at most 1 minute.
 You can update the config with `git pull`.
 
 ## Screenshot
-![screenshot](https://i.loli.net/2018/10/23/5bce8d866b3d4.png)
-![screenshot2](https://i.loli.net/2018/10/23/5bce8e5bd65bb.png)
+![screenshot](https://i.loli.net/2018/12/01/5c02178ae8844.png)
+![screenshot2](https://i.loli.net/2018/12/01/5c02181575b48.png)
