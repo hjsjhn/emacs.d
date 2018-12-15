@@ -18,6 +18,11 @@ It'll take at most 1 minute.
 ## Update
 You can update the config with `git pull`.
 
+## Attention
+
++ If some error occurs to the icons, you could use `M-x all-the-icons-install-fonts RET`
++ If you see "Warning (package): Unnecessary call to ‘package-initialize’ in init file", you could remove `(package-initialize)` in `init.el` at 4th line.
+
 ## Screenshot
 ![screenshot](https://i.loli.net/2018/12/01/5c02178ae8844.png)
 ![screenshot2](https://i.loli.net/2018/12/01/5c02181575b48.png)
