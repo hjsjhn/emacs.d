@@ -1,6 +1,8 @@
 (when (version< emacs-version "25.1")
   (error "This configuration requires at least GNU Emacs 25.2, but you're running %s" emacs-version))
 
+(package-initialize)
+
 ;;; 没用，忽略
 (custom-set-variables
  '(display-time-mode t)
