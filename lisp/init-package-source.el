@@ -9,6 +9,7 @@
 	     ("elpa" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives' 
 	     ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
+
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
