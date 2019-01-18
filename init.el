@@ -1,12 +1,8 @@
 (when (version< emacs-version "25.1")
   (error "This configuration requires at least GNU Emacs 25.2, but you're running %s" emacs-version))
 
-(package-initialize)
-
 ;;; 没用，忽略
 (custom-set-variables
- '(custom-safe-themes
-   '("4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" default))
  '(display-time-mode t)
  '(inhibit-startup-screen t)
  '(org-export-backends '(ascii html icalendar latex md odt))
@@ -38,6 +34,20 @@
 
 (put 'downcase-region 'disabled nil)
 
+;;; 透明度
+(global-set-key (kbd "C-`") 'loop-alpha)
+(setq alpha-list '((85 55) (100 100)))  
+(defun loop-alpha ()  
+  (interactive)  
+  (let ((h (car alpha-list)))                  
+    ((lambda (a ab)  
+       (set-frame-parameter (selected-frame) 'alpha (list a ab))  
+       (add-to-list 'default-frame-alist (cons 'alpha (list a ab)))  
+       ) (car h) (car (cdr h)))  
+    (setq alpha-list (cdr (append alpha-list (list h))))  
+    )  
+)  
+
 ;;; 程序风格/其实是缩进
 (setq c-default-style
       '((java-mode . "java")(other . "awk")))
@@ -57,6 +67,7 @@
   (package-install 'use-package))
 
 ;;; 自定义快捷键
+;;switch-evil
 (defun switch-evil()
   (interactive)
   (setq state (logxor 1 state))
@@ -74,8 +85,10 @@
       (evil-state 'emacs))))
 (setq state 0)
 (global-set-key (kbd "C-z") 'switch-evil)
+;;switch buffer
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
+;;open a fixed terminal
 (defun open-terminal()
   (interactive)
   (split-window-horizontally)
@@ -86,8 +99,10 @@
   (find-file "in")
   )
 (global-set-key (kbd "<f2>") 'open-terminal)
+;;others
 (global-set-key (kbd "C-x t") 'term)
 (global-set-key (kbd "C-c e") 'treemacs)
+;;templates
 (defun templ()
   (interactive)
   (load-file "~/.emacs.d/template/cpp/create_template.el"))
@@ -174,4 +189,3 @@
 
 ;;; 关闭剪切板 (for manjaro)
 ;; (setq x-select-enable-clipboard-manager nil)
-
