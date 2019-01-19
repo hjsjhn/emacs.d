@@ -23,6 +23,13 @@
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
 
+;; markdown-preview
+(defun markdown-to-html ()
+  (interactive)
+  (start-process "grip" "*gfm-to-html*" "grip" (buffer-file-name) "5000")
+  (browse-url (format "http://localhost:5000/%s.%s" (file-name-base) (file-name-extension (buffer-file-name)))))
+(global-set-key (kbd "\C-c p") 'markdown-to-html)
+
 ;; open a fixed terminal
 (defun open-terminal()
   (interactive)

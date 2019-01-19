@@ -1,4 +1,4 @@
-;; init-plugins.el --- Initialize plugins configurations.	-*- lexical-binding: t -*-
+;;; init-plugins.el --- Initialize plugins configurations.	-*- lexical-binding: t -*-
 
 ;; magit
 (use-package magit
@@ -44,7 +44,8 @@
 (use-package neotree
   :ensure t
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;; treemacs
 (use-package treemacs

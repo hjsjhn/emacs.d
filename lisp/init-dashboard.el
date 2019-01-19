@@ -8,7 +8,7 @@
   
   (defun open-custom-file ()
     (interactive)
-    (find-file "~/.emacs.d/init.el"))
+    (find-file "~/.emacs.d"))
   
   (defun restore-session ()
     "Restore last session."
