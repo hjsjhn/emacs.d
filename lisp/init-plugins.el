@@ -36,7 +36,15 @@
   :hook (after-init . doom-modeline-init)
   :config
   (setq doom-modeline-height 24)
+  (setq doom-modeline-major-mode-color-icon t)
+  ;; (setq doom-modeline-minor-modes t)
   )
+
+;; neotree
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 
 ;; treemacs
 (use-package treemacs
