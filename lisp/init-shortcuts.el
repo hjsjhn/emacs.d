@@ -1,5 +1,23 @@
 ;; init-shortcuts.el --- Initialize shortcuts configurations.	-*- lexical-binding: t -*-
 
+;; make Emcpp.sh
+(defun make (source target extra)
+  (interactive "sPlease Input Source: \nsAnd Your Target: \nsNeed Extra Compile Command?(y/n) ")
+  (setq prefix "#!/bin/bash\n")
+  (cond
+   ((= (length extra) 0)
+    (write-region (concat prefix "g++ -g " source " -o " target " -O2 -std=c++11 && ./" target) nil "./Emcpp.sh"))
+   ((equal "y" (substring extra 0 1))
+    (write-region (concat prefix "g++ -g " source " -o " target " -O2 -std=c++11 && ./" target) nil "./Emcpp.sh"))
+   (t
+    (write-region (concat prefix "g++ -g " source " -o " target " && ./" target) nil "./Emcpp.sh")))
+  (shell-command "chmod a+x ./Emcpp.sh"))
+
+;; Open Emcpp.sh
+(defun o ()
+  (interactive)
+  (shell-command "./Emcpp.sh"))
+
 ;; switch-evil
 (defun switch-evil()
   (interactive)
