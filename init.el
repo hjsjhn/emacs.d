@@ -1,5 +1,5 @@
 ;; Emacs Config
-;; 2019-01-19
+;; 2019-03-15
 
 (package-initialize)
 
@@ -24,3 +24,5 @@
 (require 'init-shortcuts)
 
 (require 'init-code-block)
+
+(require 'fira-code-mode)
