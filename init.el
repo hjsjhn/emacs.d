@@ -11,11 +11,11 @@
 
 (require 'init-window)
 
+(require 'init-plugins)
+
 (require 'init-theme)
 
 (require 'init-dashboard)
-
-(require 'init-plugins)
 
 (require 'init-file)
 
