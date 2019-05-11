@@ -5,6 +5,7 @@
 #include <cstring>
 
 #define reg register
+#define rep(i, l, r) for(int i = l; i <= r; ++i)
 typedef long long ll;
 
 template <typename _T>

@@ -11,11 +11,11 @@
 
 (require 'init-window)
 
-(require 'init-plugins)
-
 (require 'init-theme)
 
 (require 'init-dashboard)
+
+(require 'init-plugins)
 
 (require 'init-file)
 
@@ -24,5 +24,7 @@
 (require 'init-shortcuts)
 
 (require 'init-code-block)
+
+(require 'init-tab)
 
 (require 'fira-code-mode)

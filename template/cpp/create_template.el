@@ -5,6 +5,7 @@
 (insert "#include <cstring>\n")
 (insert "\n")
 (insert "#define reg register\n")
+(insert "#define rep(i, l, r) for(int i = l; i <= r; ++i)\n")
 (insert "typedef long long ll;\n")
 (insert "\n")
 (insert "template <typename _T>\n")
@@ -24,4 +25,4 @@
 (insert "\n")
 (insert "int main () {\n")
 (insert "    return 0;\n")
-(insert "}\n")
+(insert "}")
