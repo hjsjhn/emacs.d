@@ -25,11 +25,6 @@
     )  
 )  
 
-
-(display-time-mode 1) ;; 常显
-(setq display-time-24hr-format t) ;; 格式
-(setq display-time-day-and-date t) ;; 显示时间、星期、日期
-
 ;; (setq x-select-enable-clipboard-manager nil)
 
 (provide 'init-window)

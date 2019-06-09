@@ -27,8 +27,7 @@
       (progn
         (setq now night-theme)
         (message "Night Now")))
-    (load-theme now t)
-    (doom-modeline-refresh-bars))
+    (load-theme now t))
   (run-with-timer 0 3600 'synchronize-theme))
 
 (provide 'init-theme)

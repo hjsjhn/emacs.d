@@ -29,18 +29,6 @@
 ;; recentf
 (use-package recentf)
 
-;; doom-modeline
-(use-package doom-modeline
-  :ensure t
-  :defer t
-  :hook (after-init . doom-modeline-init)
-  :config
-  (setq doom-modeline-height 24)
-  (setq doom-modeline-major-mode-color-icon t)
-  (setq doom-modeline-icon t)
-  ;; (setq doom-modeline-minor-modes t)
-  )
-
 ;; neotree
 (use-package neotree
   :ensure t

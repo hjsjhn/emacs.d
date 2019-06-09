@@ -7,9 +7,9 @@
 
 (require 'init-const)
 
-(require 'init-package-source)
-
 (require 'init-window)
+
+(require 'init-package-source)
 
 (require 'init-theme)
 
@@ -26,5 +26,9 @@
 (require 'init-code-block)
 
 (require 'init-tab)
+
+;; (require 'init-auctex)
+
+(require 'init-modeline)
 
 (require 'fira-code-mode)
