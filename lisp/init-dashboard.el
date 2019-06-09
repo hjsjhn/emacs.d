@@ -71,8 +71,11 @@
                    (propertize "Edit Config" 'face 'font-lock-keyword-face))
     (insert " ")
     (widget-create 'push-button
-                   :help-echo "Update Centaur Emacs config and packages"
-                   :action (lambda (&rest _) (message "Do not support now."))
+                   :help-echo "Update Emacs config and packages"
+                   :action (lambda (&rest _)
+                             (progn
+                               (package-list-packages)
+                               (package-menu-mark-upgrades)))
                    :mouse-face 'highlight
                    (propertize "Update" 'face 'font-lock-keyword-face))
     (insert "\n")
