@@ -6,9 +6,11 @@
 (add-to-list 'package-archives'
 	     ("org-cn" . "http://elpa.zilongshanren.com/org/") t)
 (add-to-list 'package-archives'
+	     ("melpa-cn" . "http://elpa.zilongshanren.com/melpa/") t)
+(add-to-list 'package-archives'
 	     ("elpa" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives' 
-	     ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
+;;(add-to-list 'package-archives' 
+;;	     ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
