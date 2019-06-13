@@ -3,30 +3,23 @@
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
 
-;; show native line numbers
-(if (fboundp 'display-line-numbers-mode)
-    (use-package display-line-numbers
-      :ensure nil
-      :hook (prog-mode . display-line-numbers-mode))
-  (use-package linum-off
-    :demand
-    :defines linum-format
-    :hook (after-init . global-linum-mode)
-    :config
-    (setq linum-format "%4d ")
-
-    ;; Highlight current line number
-    (use-package hlinum
-      :defines linum-highlight-in-all-buffersp
-      :hook (global-linum-mode . hlinum-activate)
-      :custom-face (linum-highlight-face
-                    ((t `(
-                          :inherit default
-                          :background nil
-                          :foreground nil
-                          ))))
-      :init
-      (setq linum-highlight-in-all-buffersp t))))
+;; Set line number
+(use-package hlinum
+  :ensure t
+  :defines linum-highlight-in-all-buffersp
+  :hook (linum-mode . hlinum-activate)
+  :custom-face (linum-highlight-face
+                ((t `(
+                      :inherit default
+                      :background black
+                      :foreground black
+                      ))))
+  :init
+  (setq linum-highlight-in-all-buffersp t))
+;; (global-linum-mode 1)
+(fringe-mode 1)
+(setq linum-format "%4d ")
+(add-hook 'prog-mode-hook 'linum-mode)
 
 ;; set scroll config
 (when (display-graphic-p)
@@ -41,7 +34,6 @@
 ;;(menu-bar-mode 0)
 (scroll-bar-mode 0)
 (show-paren-mode t)
-;; (global-linum-mode 1)
 ;;(global-hl-line-mode)
 (setq maxx nil)
 (if maxx
