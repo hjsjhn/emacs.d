@@ -31,6 +31,8 @@
 
 (require 'init-font)
 
+(require 'init-function-list)
+
 (require 'fira-code-mode)
 
 ;; (require 'init-auctex)
