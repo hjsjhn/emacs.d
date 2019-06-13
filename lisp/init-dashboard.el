@@ -3,7 +3,7 @@
 (use-package dashboard
   :ensure t
   :diminish (dashboard-mode page-break-lines-mode)
-  :preface  ;import from seagle
+  :preface  ;;import from seagle
   (defvar dashboard-recover-layout-p nil)
   
   (defun open-custom-file ()
@@ -40,10 +40,13 @@
   :hook (after-init . dashboard-setup-startup-hook)
   
   :config
-  
   (setq dashboard-banner-logo-title (concat "Welcome to Emacs " emacs-version))
   (setq dashboard-startup-banner 'logo)
   (setq dashboard-items '((recents  . 10)))
+  (setq dashboard-footer-icon "")
+  ;; (setq dashboard-set-heading-icons t)
+  ;; (setq dashboard-set-file-icons t)
+  ;; (setq dashboard-set-navigator t)
   (defun dashboard-insert-buttons (_list-size)
     (insert "\n")
     (insert (make-string (max 0 (floor (/ (- dashboard-banner-length 51) 2))) ?\ ))
@@ -78,10 +81,7 @@
                                (package-menu-mark-upgrades)))
                    :mouse-face 'highlight
                    (propertize "Update" 'face 'font-lock-keyword-face))
-    (insert "\n")
-    (insert "\n")
-    (insert "\n")
-    (insert (format "[%d packages loaded in %s]" (length package-activated-list) (emacs-init-time))))
+    (insert "\n"))
 
   (add-to-list 'dashboard-item-generators  '(buttons . dashboard-insert-buttons))
   (add-to-list 'dashboard-items '(buttons))

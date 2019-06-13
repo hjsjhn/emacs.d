@@ -6,5 +6,18 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq-default indent-tabs-mode nil)
 
+;; Highlightthe current line
+(use-package hl-line
+  :ensure nil
+  :hook (after-init . global-hl-line-mode))
+
+;; Highlight matching parens
+(use-package paren
+  :ensure nil
+  :hook (after-init . show-paren-mode)
+  :config
+  (setq show-paren-when-point-inside-paren t)
+  (setq show-paren-when-point-in-periphery t))
+
 (provide 'init-code-block)
 ;; init-code-block.el ends here

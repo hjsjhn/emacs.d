@@ -7,15 +7,15 @@
 
 (require 'init-const)
 
-(require 'init-window)
+(require 'speed-up)
 
 (require 'init-package-source)
 
-(require 'init-theme)
+(require 'init-plugins)
+
+(require 'init-ui)
 
 (require 'init-dashboard)
-
-(require 'init-plugins)
 
 (require 'init-file)
 
@@ -27,8 +27,10 @@
 
 (require 'init-tab)
 
-;; (require 'init-auctex)
-
 (require 'init-modeline)
 
+(require 'init-font)
+
 (require 'fira-code-mode)
+
+;; (require 'init-auctex)

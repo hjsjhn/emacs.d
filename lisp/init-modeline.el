@@ -17,16 +17,17 @@
 (defun spaceline--unicode-number (str)
   "Return a nice unicode representation of a single-digit number STR."
   (cond
-   ((string= "1" str) "➊")
-   ((string= "2" str) "➋")
-   ((string= "3" str) "➌")
-   ((string= "4" str) "➍")
-   ((string= "5" str) "➎")
-   ((string= "6" str) "➏")
-   ((string= "7" str) "➐")
-   ((string= "8" str) "➑")
-   ((string= "9" str) "➒")
-   ((string= "0" str) "➓")))
+   ((string= "1" str) "1")
+   ((string= "2" str) "2")
+   ((string= "3" str) "3")
+   ((string= "4" str) "4")
+   ((string= "5" str) "5")
+   ((string= "6" str) "6")
+   ((string= "6" str) "6")
+   ((string= "7" str) "7")
+   ((string= "8" str) "8")
+   ((string= "9" str) "9")
+   ((string= "10" str) "10")))
 
 (defun window-number-mode-line ()
   "The current window number. Requires `window-numbering-mode' to be enabled."
@@ -59,7 +60,7 @@
                '(:eval (propertize
                         (window-number-mode-line)
                         'face
-                        'font-lock-type-face))
+                        'font-lock-preprocessor-face))
                " "
                '(:eval (zilongshanren/update-persp-name))
 
@@ -134,5 +135,10 @@
                ;;                     (concat (format-time-string "%c; ")
                ;;                             (emacs-uptime "Uptime:%hh"))))
                ))
+
+;; (setq display-time-day-and-date nil)
+;; (setq display-time-format "%H:%M")
+;; (setq display-time-default-load-average nil)
+;; (display-time-mode)
 
 (provide 'init-modeline)
