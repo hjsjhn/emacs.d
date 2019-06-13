@@ -16,7 +16,7 @@
                       ))))
   :init
   (setq linum-highlight-in-all-buffersp t))
-;; (global-linum-mode 1)
+(global-linum-mode 1)
 (fringe-mode 1)
 (setq linum-format "%4d ")
 (add-hook 'prog-mode-hook 'linum-mode)
