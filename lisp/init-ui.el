@@ -1,4 +1,4 @@
-;;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
@@ -53,33 +53,42 @@
     )
   )
 
-;; set theme
 (setq-default cursor-type 'blink)
 ;; (setq-default line-spacing 0.15)
 (put 'downcase-region 'disabled nil)
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-treemacs-config)
-  (doom-themes-org-config)
-  (setq night-theme 'doom-one)
-  (setq day-theme 'doom-one-light)
-  (defun synchronize-theme ()
-    (setq hour
-          (string-to-number
-           (substring (current-time-string) 11 13)))
-    (if (member hour (number-sequence 9 18))
-        (progn
-          (setq now day-theme)
-          (message "Day Now"))
+
+;; Set theme,choose what you like (doom-theme/gruvbox-theme)
+(if (package-installed-p 'doom-themes)
+    (use-package doom-themes
+      :ensure t
+      :config
+      (setq doom-themes-enable-bold t
+            doom-themes-enable-italic t)
+      (doom-themes-visual-bell-config)
+      (doom-themes-treemacs-config)
+      (doom-themes-org-config)
+      (setq night-theme 'doom-one)
+      (setq day-theme 'doom-one-light))
+  (use-package gruvbox-theme
+    :ensure t
+    :config
+    (setq night-theme 'gruvbox-dark-soft)
+    (setq day-theme 'gruvbox-light-medium)))
+
+(defun synchronize-theme ()
+  (setq hour
+        (string-to-number
+         (substring (current-time-string) 11 13)))
+  (if (member hour (number-sequence 9 18))
       (progn
-        (setq now night-theme)
-        (message "Night Now")))
-    (load-theme now t))
-  (run-with-timer 0 3600 'synchronize-theme))
+        (setq now day-theme)
+        (message "Day Now"))
+    (progn
+      (setq now night-theme)
+      (message "Night Now")))
+  (load-theme now t))
+(run-with-timer 0 3600 'synchronize-theme)
+
 
 (provide 'init-ui)
 
