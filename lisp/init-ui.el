@@ -1,4 +1,4 @@
-;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
@@ -16,18 +16,18 @@
                       ))))
   :init
   (setq linum-highlight-in-all-buffersp t))
-;; (global-linum-mode 1)
 (fringe-mode 1)
 (setq linum-format "%4d ")
 (add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'global-hl-line-mode 'linum-mode)
 
 ;; set scroll config
 (when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))
         mouse-wheel-progressive-speed nil))
 (setq scroll-step 1
-      scroll-margin 0
-      scroll-conservatively 100000)
+      scroll-margin 2
+      scroll-conservatively 10000)
 
 ;; set window config
 (tool-bar-mode 0)
