@@ -130,10 +130,10 @@
                '(:eval (buffer-encoding-abbrev))
                mode-line-end-spaces
                ;; add the time, with the date and the emacs uptime in the tooltip
-               ;; '(:eval (propertize (format-time-string "%H:%M")
-               ;;                     'help-echo
-               ;;                     (concat (format-time-string "%c; ")
-               ;;                             (emacs-uptime "Uptime:%hh"))))
+               '(:eval (propertize (format-time-string "%H:%M")
+                                    'help-echo
+                                    (concat (format-time-string "%c; ")
+                                            (emacs-uptime "Uptime:%hh"))))
                ))
 
 ;; (setq display-time-day-and-date nil)
