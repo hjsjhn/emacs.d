@@ -1,4 +1,4 @@
-;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
