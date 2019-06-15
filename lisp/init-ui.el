@@ -72,7 +72,7 @@
     :ensure t
     :config
     (setq night-theme 'gruvbox-dark-soft)
-    (setq day-theme 'gruvbox-dark-soft)))
+    (setq day-theme 'gruvbox-light-medium)))
 
 (defun synchronize-theme ()
   (interactive)
