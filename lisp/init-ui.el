@@ -1,4 +1,4 @@
-;;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
 
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
@@ -19,7 +19,7 @@
 (fringe-mode 1)
 (setq linum-format "%4d ")
 (add-hook 'prog-mode-hook 'linum-mode)
-(add-hook 'global-hl-line-mode 'linum-mode)
+(add-hook 'linum-mode 'global-hl-line-mode)
 
 ;; set scroll config
 (when (display-graphic-p)
@@ -34,7 +34,6 @@
 ;;(menu-bar-mode 0)
 (scroll-bar-mode 0)
 (show-paren-mode t)
-;;(global-hl-line-mode)
 (setq maxx nil)
 (if maxx
     (add-to-list 'default-frame-alist '(fullscreen . maximized)))
@@ -73,9 +72,10 @@
     :ensure t
     :config
     (setq night-theme 'gruvbox-dark-soft)
-    (setq day-theme 'gruvbox-light-medium)))
+    (setq day-theme 'gruvbox-dark-soft)))
 
 (defun synchronize-theme ()
+  (interactive)
   (setq hour
         (string-to-number
          (substring (current-time-string) 11 13)))
@@ -86,7 +86,13 @@
     (progn
       (setq now night-theme)
       (message "Night Now")))
-  (load-theme now t))
+  (progn
+    (load-theme now t)
+    (setq-default awesome-tab-background-color (face-background 'default))
+    (setq-default awesome-tab-selected-background (face-background 'default))
+    (setq-default awesome-tab-selected-foreground (face-background 'default))
+    (setq-default awesome-tab-selected-color (face-background 'default))
+    (setq-default awesome-tab-selected (face-background 'default))))
 (run-with-timer 0 3600 'synchronize-theme)
 
 
