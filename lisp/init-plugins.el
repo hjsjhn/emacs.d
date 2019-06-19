@@ -40,7 +40,9 @@
 (use-package neotree
   :ensure t
   :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  ;; You can use the neotree with al-the-icons by toggle the code next this line
+  ;;(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq neo-theme (if (display-graphic-p) 'arrow))
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
 ;; treemacs
