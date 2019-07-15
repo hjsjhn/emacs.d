@@ -69,6 +69,23 @@
                '(:eval (propertize "%b " 'face 'font-lock-keyword-face
                                    'help-echo (buffer-file-name)))
 
+               " <"
+               '(:eval (propertize (if (evil-emacs-state-p) "E"
+                                     (if (evil-normal-state-p) "N"
+                                       (if (evil-insert-state-p) "I"
+                                         (if (evil-visual-state-p) "V"
+                                           (if (evil-replace-state-p) "R"
+                                             (if (evil-motion-state-p) "M" "O"))))))
+                                   'face 'font-lock-preprocessor-face
+                                   'help-echo (concat "Buffer is in "
+                                                      (if (evil-emacs-state-p) "Emacs"
+                                                        (if (evil-normal-state-p) "Normal"
+                                                          (if (evil-insert-state-p) "Insert"
+                                                            (if (evil-visual-state-p) "Visual"
+                                                              (if (evil-replace-state-p) "Replace"
+                                                                (if (evil-motion-state-p) "Motion" "Operator Pending"))))))
+                                                      " mode")))
+               ">"
 
                " [" ;; insert vs overwrite mode, input-method in a tooltip
                '(:eval (propertize (if overwrite-mode "Ovr" "Ins")

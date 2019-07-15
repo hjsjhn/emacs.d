@@ -27,6 +27,8 @@
 
 (require 'init-tab)
 
+(require 'init-evil)
+
 (require 'init-modeline)
 
 (require 'init-font)

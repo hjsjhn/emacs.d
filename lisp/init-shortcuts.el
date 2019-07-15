@@ -18,25 +18,6 @@
   (interactive)
   (shell-command "./Emcpp.sh"))
 
-;; switch-evil
-(defun switch-evil()
-  (interactive)
-  (setq state (logxor 1 state))
-  (if state
-      (progn
-        (use-package evil
-          :ensure t
-          :config
-          (evil-mode 1)
-          (setq-default evil-cross-lines t)
-          (define-key evil-insert-state-map (kbd "\jk") 'evil-change-to-previous-state)))
-    (progn
-      (evil-mode nil)
-      (setq cursor-type 'blink)
-      (evil-state 'emacs))))
-(setq state 0)
-(global-set-key (kbd "C-z") 'switch-evil)
-
 ;; switch buffer
 (global-set-key (kbd "M-j") 'previous-buffer)
 (global-set-key (kbd "M-k") 'next-buffer)
