@@ -40,7 +40,7 @@ using namespace IO;
 #define rep(i, l, r) for(int i = l; i <= r; ++i)
 #define lep(i, l, r) for(int i = l; i < r; ++i)
 #define irep(i, r, l) for(int i = r; i >= l; --i)
-#define ilep(i, r, l) for(int i =r; i > l; --i)
+#define ilep(i, r, l) for(int i = r; i > l; --i)
 typedef long long ll;
 
 int main () {
