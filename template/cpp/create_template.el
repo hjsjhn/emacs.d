@@ -40,7 +40,7 @@
 (insert "#define rep(i, l, r) for(int i = l; i <= r; ++i)\n")
 (insert "#define lep(i, l, r) for(int i = l; i < r; ++i)\n")
 (insert "#define irep(i, r, l) for(int i = r; i >= l; --i)\n")
-(insert "#define ilep(i, r, l) for(int i =r; i > l; --i)\n")
+(insert "#define ilep(i, r, l) for(int i = r; i > l; --i)\n")
 (insert "typedef long long ll;\n")
 (insert "\n")
 (insert "int main () {\n")
