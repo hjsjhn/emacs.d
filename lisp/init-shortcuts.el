@@ -13,6 +13,12 @@
     (write-region (concat prefix "g++ -g " source " -o " target " && ./" target) nil "./Emcpp.sh")))
   (shell-command "chmod a+x ./Emcpp.sh"))
 
+(defun g++-compile-and-run ()
+  (interactive)
+  (compile (format "g++ %s -o a.exec && a.exec" (buffer-file-name))))
+
+(global-set-key (kbd "C-S-j") 'g++-compile-and-run)
+
 ;; Open Emcpp.sh
 (defun o ()
   (interactive)
