@@ -29,4 +29,3 @@ You can use FiraCode font in this config by command `M-x fira-code-mode RET` if 
 ## Screenshot
 ![screenshot1](screenshots/screenshot1.png)
 ![screenshot2](screenshots/screenshot2.png)
-![code](screenshots/code.png)

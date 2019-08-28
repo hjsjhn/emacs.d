@@ -12,6 +12,12 @@
 ;;   :ensure t
 ;;   )
 
+;; auto-complete
+(use-package auto-complete
+  :ensure t
+  :config
+  (global-auto-complete-mode t))
+
 ;; window-numbering
 (use-package window-numbering
   :ensure t

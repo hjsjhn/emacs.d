@@ -31,7 +31,7 @@
 
 ;; set window config
 (tool-bar-mode 0)
-;;(menu-bar-mode 0)
+(menu-bar-mode 0)
 (scroll-bar-mode 0)
 (show-paren-mode t)
 (setq maxx nil)
@@ -72,7 +72,16 @@
     :ensure t
     :config
     (setq night-theme 'gruvbox-dark-soft)
-    (setq day-theme 'gruvbox-light-medium)))
+    ;; (setq day-theme 'gruvbox-dark-soft)
+    (setq day-theme 'gruvbox-light-medium)
+    (defun tab-set-day-theme ()
+      (custom-set-faces
+       '(awesome-tab-selected ((t (:background "#fbf1c7" :foreground "black"))))
+       '(awesome-tab-unselected ((t (:background "#DACFA0" :foreground "grey50"))))))
+    (defun tab-set-night-theme ()
+      (custom-set-faces
+       '(awesome-tab-selected ((t (:background "#32302F" :foreground "#fdf4c1"))))
+       '(awesome-tab-unselected ((t (:background "#262422" :foreground "grey50"))))))))
 
 (defun synchronize-theme ()
   (interactive)
@@ -82,17 +91,14 @@
   (if (member hour (number-sequence 9 18))
       (progn
         (setq now day-theme)
-        (message "Day Now"))
+        (message "Day Now")
+        (tab-set-day-theme))
     (progn
       (setq now night-theme)
       (message "Night Now")))
   (progn
     (load-theme now t)
-    (setq-default awesome-tab-background-color (face-background 'default))
-    (setq-default awesome-tab-selected-background (face-background 'default))
-    (setq-default awesome-tab-selected-foreground (face-background 'default))
-    (setq-default awesome-tab-selected-color (face-background 'default))
-    (setq-default awesome-tab-selected (face-background 'default))))
+    (setq-default awesome-tab-background-color (face-background 'default))))
 (run-with-timer 0 3600 'synchronize-theme)
 
 
