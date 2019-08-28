@@ -4,8 +4,11 @@
   :ensure t
   :config
   (evil-mode 1)
-  (evil-set-initial-state 'prog-mode 'emacs)
-  (evil-set-initial-state 'fundamental-mode 'emacs)
+  ;; toggle code to set emacs mode in particular mode
+  ;; (evil-set-initial-state 'prog-mode 'emacs)
+  ;; (evil-set-initial-state 'fundamental-mode 'emacs)
+  ;; (evil-set-initial-state 'dired-mode 'emacs)
+  (setq evil-default-state 'emacs)
   (setq evil-emacs-state-cursor 'blink)
   (define-key evil-insert-state-map (kbd "\jk") 'evil-change-to-previous-state)
   (setq evil-auto-indent t)
