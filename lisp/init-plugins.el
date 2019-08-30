@@ -7,16 +7,20 @@
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-;; magit
-;; (use-package magit
-;;   :ensure t
-;;   )
-
 ;; auto-complete
 (use-package auto-complete
   :ensure t
   :config
   (global-auto-complete-mode t))
+
+(use-package multi-compile
+  :ensure t
+  :config
+  (if sys/win32p
+    (setq multi-compile-alist
+          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 && %file-sans.exec")))))
+    (setq multi-compile-alist
+          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 && ./%file-sans.exec")))))))
 
 ;; window-numbering
 (use-package window-numbering
