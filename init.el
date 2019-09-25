@@ -1,6 +1,11 @@
-;; Emacs Config
-;; 2019-08-30
+;;; package --- Summary
 
+;;; Commentary:
+
+;;; Emacs Config
+;; 2019-03-15
+
+;;; Code:
 (package-initialize)
 
 (push (expand-file-name "lisp" user-emacs-directory) load-path)
@@ -35,6 +40,8 @@
 
 (require 'init-function-list)
 
+(require 'init-flycheck)
+
 (require 'fira-code-mode)
 
-;; (require 'init-auctex)
+;;; init.el ends here

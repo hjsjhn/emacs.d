@@ -1,4 +1,8 @@
-;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+;;; init-ui.el --- Initialize ui configurations.	-*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
 
 (setq frame-title-format '("Emacs - %b")
       icon-title-format frame-title-format)
@@ -20,6 +24,7 @@
 (setq linum-format "%4d ")
 (add-hook 'prog-mode-hook 'linum-mode)
 (add-hook 'linum-mode 'global-hl-line-mode)
+(when window-system (set-frame-size (selected-frame) 90 44))
 
 ;; set scroll config
 (when (display-graphic-p)
@@ -67,21 +72,32 @@
       (doom-themes-treemacs-config)
       (doom-themes-org-config)
       (setq night-theme 'doom-one)
-      (setq day-theme 'doom-one-light))
+      (setq day-theme 'doom-one-light)
+      (defun tab-set-day-theme ())
+      (defun tab-set-night-theme ()))
   (use-package gruvbox-theme
     :ensure t
     :config
     (setq night-theme 'gruvbox-dark-soft)
-    ;; (setq day-theme 'gruvbox-dark-soft)
     (setq day-theme 'gruvbox-light-medium)
     (defun tab-set-day-theme ()
       (custom-set-faces
-       '(awesome-tab-selected ((t (:background "#fbf1c7" :foreground "black"))))
-       '(awesome-tab-unselected ((t (:background "#DACFA0" :foreground "grey50"))))))
+       '(centaur-tabs-active-bar-face ((t (:background "#fb4933"))))
+       '(centaur-tabs-selected ((t (:background "#fbf1c7" :foreground "black"))))
+       '(centaur-tabs-selected-modified ((t (:background "#fbf1c7" :foreground "black"))))
+       '(centaur-tabs-modified-marker-selected ((t (:background "#fbf1c7" :foreground "black"))))
+       '(centaur-tabs-unselected ((t (:background "#DACFA0" :foreground "grey50"))))
+       '(centaur-tabs-unselected-modified ((t (:background "#DACFA0" :foreground "grey50"))))
+       '(centaur-tabs-modified-marker-unselected ((t (:background "#DACFA0" :foreground "grey50"))))))
     (defun tab-set-night-theme ()
       (custom-set-faces
-       '(awesome-tab-selected ((t (:background "#32302F" :foreground "#fdf4c1"))))
-       '(awesome-tab-unselected ((t (:background "#262422" :foreground "grey50"))))))))
+       '(centaur-tabs-active-bar-face ((t (:background "#cc241d"))))
+       '(centaur-tabs-selected ((t (:background "#32302F" :foreground "#fdf4c1"))))
+       '(centaur-tabs-selected-modified ((t (:background "#32302F" :foreground "#fdf4c1"))))
+       '(centaur-tabs-modified-marker-selected ((t (:background "#32302F" :foreground "#fdf4c1"))))
+       '(centaur-tabs-unselected ((t (:background "#262422" :foreground "grey50"))))
+       '(centaur-tabs-unselected-modified ((t (:background "#262422" :foreground "grey50"))))
+       '(centaur-tabs-modified-marker-unselected ((t (:background "#262422" :foreground "grey50"))))))))
 
 (defun synchronize-theme ()
   (interactive)
@@ -92,16 +108,16 @@
       (progn
         (setq now day-theme)
         (message "Day Now")
-        (tab-set-day-theme))
+        (tab-set-night-theme))
     (progn
       (setq now night-theme)
-      (message "Night Now")))
+      (message "Night Now")
+      (tab-set-night-theme)))
   (progn
-    (load-theme now t)
-    (setq-default awesome-tab-background-color (face-background 'default))))
+    (load-theme now t)))
+
 (run-with-timer 0 3600 'synchronize-theme)
 
 
 (provide 'init-ui)
-
-;;;init-ui.el ends here
+;;; init-ui.el ends here
