@@ -108,7 +108,7 @@
       (progn
         (setq now day-theme)
         (message "Day Now")
-        (tab-set-night-theme))
+        (tab-set-day-theme))
     (progn
       (setq now night-theme)
       (message "Night Now")
