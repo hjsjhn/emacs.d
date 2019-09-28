@@ -1,5 +1,7 @@
-;; init-shortcuts.el --- Initialize shortcuts configurations.	-*- lexical-binding: t -*-
+;;; init-shortcuts.el --- Initialize shortcuts configurations.	-*- lexical-binding: t -*-
+;;; Commentary:
 
+;;; Code:
 (global-set-key (kbd "C-S-j") 'multi-compile-run)
 
 (global-set-key (kbd "C-x C-l") 'save-buffer)
@@ -14,11 +16,11 @@
 ;; templates
 (defun templ()
   (interactive)
-  (load-file "~/.emacs.d/template/cpp/create_template.el"))
+  (load-file "~/.emacs.d/templates/create_template.el"))
 
 ;; others
 (global-set-key (kbd "C-x t") 'term)
 (global-set-key (kbd "C-c e") 'neotree-toggle)
 
 (provide 'init-shortcuts)
-;; init-shortcuts.el ends here
+;;; init-shortcuts.el ends here

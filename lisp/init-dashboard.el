@@ -42,7 +42,7 @@
   :config
   (setq dashboard-banner-logo-title (concat "Welcome to Emacs " emacs-version))
   ;; (setq dashboard-startup-banner 'logo)
-  (setq dashboard-startup-banner (concat user-emacs-directory "template/emacs-china-icon.png"))
+  (setq dashboard-startup-banner (concat user-emacs-directory "templates/emacs-china-icon.png"))
   (setq dashboard-items '((recents  . 10)))
   (setq dashboard-footer-icon "")
   ;; (setq dashboard-set-heading-icons t)

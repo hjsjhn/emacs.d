@@ -1,9 +1,9 @@
-;;; package --- Summary
+;;; init.el --- Total initialize configurations.	-*- lexical-binding: t -*-
 
 ;;; Commentary:
 
 ;;; Emacs Config
-;; 2019-03-15
+;;; 2019-09-28
 
 ;;; Code:
 (package-initialize)
@@ -36,9 +36,13 @@
 
 (require 'init-modeline)
 
+(require 'init-ivy)
+
 (require 'init-font)
 
 (require 'init-function-list)
+
+(require 'int-template)
 
 (require 'init-flycheck)
 

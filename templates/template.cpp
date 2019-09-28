@@ -37,6 +37,7 @@ namespace IO {
 using namespace IO;
 
 #define reg register
+#define debug(...) fprintf(stderr, __VA_ARGS__)
 #define rep(i, l, r) for(int i = l; i <= r; ++i)
 #define lep(i, l, r) for(int i = l; i < r; ++i)
 #define irep(i, r, l) for(int i = r; i >= l; --i)
@@ -44,5 +45,7 @@ using namespace IO;
 typedef long long ll;
 
 int main () {
+#ifdef LOCAL
+#endif
     return 0;
 }
