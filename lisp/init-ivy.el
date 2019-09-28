@@ -1,4 +1,5 @@
 (use-package counsel
+  :ensure t
   :diminish ivy-mode counsel-mode
   :defines (projectile-completion-system
             magit-completing-read-function)
@@ -79,22 +80,6 @@
         ivy-count-format "(%d/%d) "
         ivy-on-del-error-function nil
         ivy-initial-inputs-alist nil)
-
-  (defun my-ivy-format-function-arrow (cands)
-    "Transform CANDS into a string for minibuffer."
-    (ivy--format-function-generic
-     (lambda (str)
-       (concat (if (display-graphic-p)
-                   (all-the-icons-octicon "chevron-right" :height 0.8 :v-adjust -0.05)
-                 ">")
-               (propertize " " 'display `(space :align-to 2))
-               (ivy--add-face str 'ivy-current-match)))
-     (lambda (str)
-       (concat (propertize " " 'display `(space :align-to 2)) str))
-     cands
-     "\n"))
-  (setq ivy-format-functions-alist '((counsel-describe-face . counsel--faces-format-function)
-                                     (t . my-ivy-format-function-arrow)))
 
   (setq swiper-action-recenter t)
 
@@ -198,16 +183,19 @@
 
   ;; Enhance M-x
   (use-package amx
+    :ensure t
     :init (setq amx-history-length 20))
 
   ;; Better sorting and filtering
   (use-package prescient
+    :ensure t
     :commands prescient-persist-mode
     :init
     (setq prescient-filter-method '(literal regexp initialism fuzzy))
     (prescient-persist-mode 1))
 
   (use-package ivy-prescient
+    :ensure t
     :commands ivy-prescient-re-builder
     :custom-face (ivy-minibuffer-match-face-1 ((t (:inherit font-lock-doc-face :foreground nil))))
     :preface
@@ -232,20 +220,9 @@
     :bind (:map ivy-minibuffer-map
                 ("M-o" . ivy-dispatching-done-hydra)))
 
-  ;; Ivy integration for Projectile
-  (use-package counsel-projectile
-    :init
-    (setq counsel-projectile-grep-initial-input '(ivy-thing-at-point))
-    (counsel-projectile-mode 1))
-
-  ;; Integrate yasnippet
-  (use-package ivy-yasnippet
-    :commands ivy-yasnippet--preview
-    :bind ("C-c C-y" . ivy-yasnippet)
-    :config (advice-add #'ivy-yasnippet--preview :override #'ignore))
-
   ;; Select from xref candidates with Ivy
   (use-package ivy-xref
+    :ensure t
     :init
     (when (boundp 'xref-show-definitions-function)
       (setq xref-show-definitions-function #'ivy-xref-show-defs))
@@ -320,123 +297,12 @@
 
 ;; More friendly display transformer for Ivy
 (use-package ivy-rich
-  :defines (all-the-icons-icon-alist
-            all-the-icons-dir-icon-alist
-            bookmark-alist)
-  :functions (all-the-icons-icon-for-file
-              all-the-icons-icon-for-mode
-              all-the-icons-icon-family
-              all-the-icons-faicon
-              all-the-icons-octicon
-              all-the-icons-material
-              all-the-icons-match-to-alist
-              all-the-icons-auto-mode-match?
-              all-the-icons-dir-is-submodule
-              my-ivy-rich-bookmark-type)
+  :ensure t
   :commands (ivy-rich-bookmark-filename
              ivy-rich-bookmark-type)
   :preface
   (defun ivy-rich-bookmark-name (candidate)
     (car (assoc candidate bookmark-alist)))
-
-  (defun ivy-rich-buffer-icon (candidate)
-    "Display buffer icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (let* ((buffer (get-buffer candidate))
-             (buffer-file-name (buffer-file-name buffer))
-             (major-mode (buffer-local-value 'major-mode buffer))
-             (icon (if (and buffer-file-name
-                            (all-the-icons-auto-mode-match?))
-                       (all-the-icons-icon-for-file (file-name-nondirectory buffer-file-name) :v-adjust -0.05)
-                     (all-the-icons-icon-for-mode major-mode :v-adjust -0.05))))
-        (if (symbolp icon)
-            (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0)
-          icon))))
-
-  (defun ivy-rich-file-icon (candidate)
-    "Display file icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (let* ((path (file-local-name (concat ivy--directory candidate)))
-             (file (file-name-nondirectory path))
-             (icon (cond
-                    ((file-directory-p path)
-                     (cond
-                      ((and (fboundp 'tramp-tramp-file-p)
-                            (tramp-tramp-file-p default-directory))
-                       (all-the-icons-octicon "file-directory" :height 1.0 :v-adjust 0.01))
-                      ((file-symlink-p path)
-                       (all-the-icons-octicon "file-symlink-directory" :height 1.0 :v-adjust 0.01))
-                      ((all-the-icons-dir-is-submodule path)
-                       (all-the-icons-octicon "file-submodule" :height 1.0 :v-adjust 0.01))
-                      ((file-exists-p (format "%s/.git" path))
-                       (all-the-icons-octicon "repo" :height 1.1 :v-adjust 0.01))
-                      (t (let ((matcher (all-the-icons-match-to-alist path all-the-icons-dir-icon-alist)))
-                           (apply (car matcher) (list (cadr matcher) :v-adjust 0.01))))))
-                    ((string-match "^/.*:$" path)
-                     (all-the-icons-material "settings_remote" :height 1.0 :v-adjust -0.2))
-                    ((not (string-empty-p file))
-                     (all-the-icons-icon-for-file file :v-adjust -0.05)))))
-        (if (symbolp icon)
-            (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.8 :v-adjust 0.0)
-          icon))))
-
-  (defun ivy-rich-dir-icon (_candidate)
-    "Display directory icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-octicon "file-directory" :height 1.0 :v-adjust 0.01)))
-
-  (defun ivy-rich-function-icon (_candidate)
-    "Display function icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-faicon "cube" :height 0.9 :v-adjust -0.05 :face 'all-the-icons-purple)))
-
-  (defun ivy-rich-variable-icon (_candidate)
-    "Display variable icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-octicon "tag" :height 0.9 :v-adjust 0 :face 'all-the-icons-lblue)))
-
-  (defun ivy-rich-symbol-icon (_candidate)
-    "Display symbol icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-octicon "gear" :height 0.9 :v-adjust -0.05)))
-
-  (defun ivy-rich-theme-icon (_candidate)
-    "Display theme icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-material "palette" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue)))
-
-  (defun ivy-rich-keybinding-icon (_candidate)
-    "Display keybindings icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-material "keyboard" :height 1.0 :v-adjust -0.2)))
-
-  (defun ivy-rich-library-icon (_candidate)
-    "Display library icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-material "view_module" :height 1.0 :v-adjust -0.2 :face 'all-the-icons-lblue)))
-
-  (defun ivy-rich-package-icon (_candidate)
-    "Display package icons in `ivy-rich'."
-    (when (display-graphic-p)
-      (all-the-icons-faicon "archive" :height 0.9 :v-adjust 0.0 :face 'all-the-icons-silver)))
-
-  (when (display-graphic-p)
-    (defun my-ivy-rich-bookmark-type (candidate)
-      (let ((filename (file-local-name (ivy-rich-bookmark-filename candidate))))
-        (cond ((null filename)
-               (all-the-icons-material "block" :v-adjust -0.2 :face 'warning))  ; fixed #38
-              ((file-remote-p filename)
-               (all-the-icons-material "wifi_tethering" :v-adjust -0.2 :face 'mode-line-buffer-id))
-              ((not (file-exists-p filename))
-               (all-the-icons-material "block" :v-adjust -0.2 :face 'error))
-              ((file-directory-p filename)
-               (all-the-icons-octicon "file-directory" :height 0.9 :v-adjust -0.05))
-              (t (all-the-icons-icon-for-file (file-name-nondirectory filename) :height 0.9 :v-adjust -0.05)))))
-    (advice-add #'ivy-rich-bookmark-type :override #'my-ivy-rich-bookmark-type))
-  :hook ((ivy-mode . ivy-rich-mode)
-         (ivy-rich-mode . (lambda ()
-                            (setq ivy-virtual-abbreviate
-                                  (or (and ivy-rich-mode 'abbreviate) 'name)))))
   :init
   ;; For better performance
   (setq ivy-rich-parse-remote-buffer nil)

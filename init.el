@@ -42,7 +42,7 @@
 
 (require 'init-function-list)
 
-(require 'int-template)
+(require 'init-template)
 
 (require 'init-flycheck)
 
