@@ -12,16 +12,9 @@
 ;;(add-to-list 'package-archives' 
 ;;	     ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/") t)
 
-(defun choose-theme (chs)
-    (interactive "sDoom-themes & Gruvbox-themes, Which theme do you prefer?(d/g)")
-    (if (equal "g" (substring chs 0 1))
-        (package-install 'gruvbox-theme)
-      (package-install 'doom-themes)))
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package)
-  (call-interactively #'choose-theme))
+  (package-install 'use-package))
 
 (provide 'init-package-source)
 ;; init-package-source.el ends here
