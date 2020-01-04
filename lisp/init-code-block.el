@@ -6,6 +6,11 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (setq-default indent-tabs-mode nil)
 
+(use-package clang-format+
+  :ensure t
+  :config
+  (add-hook 'c-mode-common-hook #'clang-format+-mode))
+
 ;; Highlightthe current line
 ;; (use-package hl-line
 ;;   :ensure nil
