@@ -76,6 +76,7 @@
   (ivy-posframe-mode +1))
 
 (use-package ivy-rich
+  :ensure t
   :preface
   (defun ivy-rich-switch-buffer-icon (candidate)
     (with-current-buffer
