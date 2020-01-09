@@ -1,3 +1,41 @@
+;;; init-ivy.el --- Initialize Ivy && Counsel && Swiper configurations.	-*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
+
+(use-package ivy
+  :ensure t
+  :hook (after-init . ivy-mode)
+  :config
+  (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)
+  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
+  (setq ivy-re-builders-alist
+        '((counsel-rg . ivy--regex-plus)
+          (counsel-projectile-rg . ivy--regex-plus)
+          (counsel-ag . ivy--regex-plus)
+          (counsel-projectile-ag . ivy--regex-plus)
+          (swiper . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) "
+        ivy-initial-inputs-alist nil)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+
+(use-package ivy-posframe
+  :after ivy
+  :ensure t
+  :diminish
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
+        ivy-posframe-height-alist '((t . 20))
+        ivy-posframe-parameters '((internal-border-width . 10)))
+  (setq ivy-posframe-width 70)
+  (ivy-posframe-mode +1))
+
 (use-package counsel
   :ensure t
   :diminish ivy-mode counsel-mode
@@ -8,8 +46,8 @@
               my-swiper-toggle-rg-dwim)
   :commands (ivy--format-function-generic
              ivy--add-face)
-  :bind (("C-s" . swiper-isearch)
-         ("C-r" . swiper-isearch-backward)
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper-backward)
          ("s-f" . swiper)
          ("C-S-s" . swiper-all)
 
@@ -76,7 +114,7 @@
 
   (setq ivy-use-selectable-prompt t
         ivy-use-virtual-buffers t    ; Enable bookmarks and recentf
-        ivy-height 10
+        ivy-height 7
         ivy-count-format "(%d/%d) "
         ivy-on-del-error-function nil
         ivy-initial-inputs-alist nil)

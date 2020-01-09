@@ -10,7 +10,10 @@
   ;; (evil-set-initial-state 'dired-mode 'emacs)
   (setq evil-default-state 'emacs)
   (setq evil-emacs-state-cursor 'blink)
-  (define-key evil-insert-state-map (kbd "\jk") 'evil-change-to-previous-state)
+  ;;(define-key evil-insert-state-map (kbd "\jk") 'evil-change-to-previous-state)
+  (define-key evil-insert-state-map (kbd "C-c") 'evil-change-to-previous-state)
+  (define-key evil-insert-state-map (kbd "C-[") 'evil-change-to-previous-state)
+  (define-key evil-insert-state-map (kbd "C-]") 'evil-change-to-previous-state)
   (setq evil-auto-indent t)
   (setq evil-shift-width '4))
 
