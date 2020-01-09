@@ -1,19 +1,9 @@
-;; init-theme.el --- Initialize theme configurations.	-*- lexical-binding: t -*-
-;; author : zilongshanren
+;;; init-theme.el --- Initialize theme configurations.	-*- lexical-binding: t -*-
+;;; author : zilongshanren
 
-(defun zilongshanren/update-persp-name ()
-  (when (bound-and-true-p persp-mode)
-    ;; There are multiple implementations of
-    ;; persp-mode with different APIs
-    (progn
-      (or (not (string= persp-nil-name (safe-persp-name (get-frame-persp))))
-          "Default")
-      (let ((name (safe-persp-name (get-frame-persp))))
-        (propertize (concat "[" name "] ")
-                    'face 'font-lock-preprocessor-face
-                    'help-echo "Current Layout name.")))))
+;;; Commentary:
 
-
+;;; Code:
 (defun spaceline--unicode-number (str)
   "Return a nice unicode representation of a single-digit number STR."
   (cond
@@ -61,10 +51,8 @@
                         (window-number-mode-line)
                         'face
                         'font-lock-preprocessor-face))
-               " "
-               '(:eval (zilongshanren/update-persp-name))
 
-               "%1 "
+               "%1   "
                ;; the buffer name; the file name as a tool tip
                '(:eval (propertize "%b " 'face 'font-lock-keyword-face
                                    'help-echo (buffer-file-name)))
@@ -119,39 +107,29 @@
                '(:eval (propertize "%m" 'face 'font-lock-string-face
                                    'help-echo buffer-file-coding-system))
 
-               ;; "%1 "
-               ;; my-flycheck-mode-line
-               ;; "%1 "
-               ;; evil state
-               ;; '(:eval evil-mode-line-tag)
-
-               ;; minor modes
-               minor-mode-alist
-               " "
-               ;; git info
-               `(vc-mode vc-mode)
-
-               " "
-
                ;; global-mode-string goes in mode-line-misc-info
                mode-line-misc-info
 
-               (mode-line-fill 'mode-line 20)
+               (mode-line-fill 'mode-line 22)
+
+               " ["
+               '(:eval (buffer-encoding-abbrev))
+               "]"
 
                ;; line and column
-               "(" ;; '%02' to set to 2 chars at least; prevents flickering
+               " (" ;; '%02' to set to 2 chars at least; prevents flickering
                (propertize "%02l" 'face 'font-lock-type-face) ","
                (propertize "%02c" 'face 'font-lock-type-face)
                ") "
 
-               '(:eval (buffer-encoding-abbrev))
-               mode-line-end-spaces
                ;; add the time, with the date and the emacs uptime in the tooltip
                '(:eval (propertize (format-time-string "%H:%M")
                                     'help-echo
                                     (concat (format-time-string "%c; ")
                                             (emacs-uptime "Uptime:%hh"))))
+               mode-line-end-spaces
                ))
+              
 
 ;; (setq display-time-day-and-date nil)
 ;; (setq display-time-format "%H:%M")

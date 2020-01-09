@@ -27,5 +27,7 @@ You can use FiraCode font in this config by command `M-x fira-code-mode RET` if 
 + If you see "Warning (package): Unnecessary call to ‘package-initialize’ in init file", you could remove `(package-initialize)` in `init.el` at 4th line.
 
 ## Screenshot
-![screenshot1](screenshots/screenshot1.png)
-![screenshot2](screenshots/screenshot2.png)
+![screenshot0](screenshots/emacs-0.png)  
+![screenshot1](screenshots/emacs-1.png)  
+![screenshot2](screenshots/emacs-2.png)
+
