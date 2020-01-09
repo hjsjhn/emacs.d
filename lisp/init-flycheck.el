@@ -48,13 +48,18 @@
 
   ;; Display Flycheck errors in GUI tooltips
   (if (display-graphic-p)
-      (use-package flycheck-pos-tip
-        :ensure t
-        :defines flycheck-pos-tip-timeout
-        :hook (global-flycheck-mode . flycheck-pos-tip-mode)
-        :config (setq flycheck-pos-tip-timeout 30))
+      (if emacs/>=26p
+          (use-package flycheck-posframe
+            :ensure t
+            :hook (flycheck-mode . flycheck-posframe-mode)
+            :config (add-to-list 'flycheck-posframe-inhibit-functions
+                                 #'(lambda () (bound-and-true-p company-backend))))
+        (use-package flycheck-pos-tip
+          :ensure t
+          :defines flycheck-pos-tip-timeout
+          :hook (global-flycheck-mode . flycheck-pos-tip-mode)
+          :config (setq flycheck-pos-tip-timeout 30)))
     (use-package flycheck-popup-tip
-      :ensure t
       :hook (flycheck-mode . flycheck-popup-tip-mode))))
 
 (provide 'init-flycheck)

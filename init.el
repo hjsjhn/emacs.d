@@ -1,9 +1,11 @@
 ;;; init.el --- Total initialize configurations.	-*- lexical-binding: t -*-
-;; Emacs Config
-;; 2020-01-09
+
+;;; Commentary:
+
+;;; Emacs Config
+;;; 2019-09-28
 
 ;;; Code:
-
 (package-initialize)
 
 (push (expand-file-name "lisp" user-emacs-directory) load-path)

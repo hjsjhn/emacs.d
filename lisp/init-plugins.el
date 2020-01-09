@@ -19,15 +19,75 @@
   :config
   (if sys/win32p
     (setq multi-compile-alist
-          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 -DLOCAL && %file-sans.exec")))))
+          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 -DLOCAL ;; %file-sans.exec")))))
     (setq multi-compile-alist
-          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 -DLOCAL && ./%file-sans.exec")))))))
+          '((c++-mode . (("c++-compile-run" . "g++ %file-name -o %file-sans.exec -g -O2 -std=c++11 -DLOCAL ;; ./%file-sans.exec")))))))
 
 ;; window-numbering
 (use-package window-numbering
   :ensure t
   :config
   (window-numbering-mode t))
+
+;; Ivy && Counsel && Swiper
+(use-package counsel
+  :ensure t
+  :diminish
+  :hook (ivy-mode . counsel-mode)
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "s-P") #'counsel-M-x)
+  (setq counsel-rg-base-command "rg --vimgrep %s"))
+
+(use-package ivy
+  :ensure t
+  :hook (after-init . ivy-mode)
+  :config
+  (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-use-selectable-prompt t)
+  (define-key ivy-minibuffer-map (kbd "<escape>") #'minibuffer-keyboard-quit)
+  (setq ivy-re-builders-alist
+        '((counsel-rg . ivy--regex-plus)
+          (counsel-projectile-rg . ivy--regex-plus)
+          (counsel-ag . ivy--regex-plus)
+          (counsel-projectile-ag . ivy--regex-plus)
+          (swiper . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) "
+        ivy-initial-inputs-alist nil)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file))
+
+(use-package swiper
+  :ensure t
+  :after ivy
+  :config
+  (global-set-key (kbd "C-s") 'counsel-grep-or-swiper))
+
+(use-package ivy-posframe
+  :after ivy
+  :ensure t
+  :diminish
+  :config
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center))
+        ivy-posframe-height-alist '((t . 20))
+        ivy-posframe-parameters '((internal-border-width . 10)))
+  (setq ivy-posframe-width 70)
+  (ivy-posframe-mode +1))
+
+(use-package ivy-rich
+  :preface
+  (defun ivy-rich-switch-buffer-icon (candidate)
+    (with-current-buffer
+        (get-buffer candidate)
+      (all-the-icons-icon-for-mode major-mode)))
+  :init
+  :config
+  (ivy-rich-mode +1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
 
 ;; recentf
 (use-package recentf)

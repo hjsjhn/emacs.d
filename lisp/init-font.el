@@ -3,7 +3,7 @@
 (when (display-graphic-p)
   ;; Set default font
   (catch 'loop
-    (dolist (font '("Cascadia Code" "Cascadia Code PL" "Fira Code" "SF Mono" "Hack" "Source Code Pro"
+    (dolist (font '("Fira Code" "SF Mono" "Hack" "Source Code Pro"
                     "Menlo" "Monaco" "Ubuntu Mono" "DejaVu Sans Mono" "Consolas"))
       (when (member font (font-family-list))
         (message "Font founded")
